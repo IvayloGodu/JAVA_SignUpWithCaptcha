@@ -1,0 +1,43 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+
+import java.util.Date;
+public class SignUpTestTM {
+    public static void main(String[] args) {
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://");
+        driver.manage().window().maximize();
+        driver.findElement(By.id("menu_485_115_28617")).click();
+        driver.findElement(By.cssSelector("#register_account_type_corporate_form_input > .check-radio-label")).click();
+        driver.findElement(By.id("first_name")).click();
+        driver.findElement(By.id("first_name")).sendKeys("George");
+        driver.findElement(By.id("last_name")).click();
+        driver.findElement(By.id("last_name")).sendKeys("Washington");
+        driver.findElement(By.id("email")).click();
+        driver.findElement(By.id("email")).click();
+        driver.findElement(By.id("email")).click();
+        driver.findElement(By.id("email")).sendKeys(new Date().getTime() + "@gmail.com");
+        driver.findElement(By.id("__pin_mobile_number_mobile_phone")).sendKeys("88" + new Date().getTime());
+        driver.findElement(By.id("cookies-read-more-link")).click();
+        driver.findElement(By.xpath("//input//following-sibling::label[contains(@for,'terms_of_use_agree')]")).click();
+        WebElement element = driver.findElement(By.xpath("//div[contains(@id,'register_calc_captcha_row')]')]"));
+        String str = element.getText();
+
+        String s1 = str.substring(0);
+        String s2 = str.substring(1);
+
+        Integer i1 = Integer.valueOf(s1);
+        Integer i2 = Integer.valueOf(s2);
+
+        Integer i = i1 + i2;
+        String answer = String.valueOf(i);
+        element = driver.findElement(By.xpath("//div//following-sibling::input[contains(@name,'__calc_captcha_text')]"));
+        element.sendKeys(answer);
+
+         }
+}
